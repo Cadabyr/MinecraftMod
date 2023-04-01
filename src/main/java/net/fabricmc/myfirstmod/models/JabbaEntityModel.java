@@ -6,33 +6,24 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.PathAwareEntity;
 
 public class JabbaEntityModel extends EntityModel<JabbaEntity> {
 	private final ModelPart base;
-	public JabbaEntityModel(ModelPart part) {
-		base = part.getChild("Body");
+
+	public JabbaEntityModel(ModelPart modelPart) {
+		this.base = modelPart;
 	}
 
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		modelPartData.addChild("Body", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-		modelPartData.addChild("Bottom", ModelPartBuilder.create()
-				.uv(272, 220).cuboid(-30.0F, -14.0F, -28.0F, 2.0F, 14.0F, 56.0F)
-				.uv(272, 220).cuboid(28.0F, -14.0F, -28.0F, 2.0F, 14.0F, 56.0F)
-				.uv(90, 316).cuboid(24.0F, -10.0F, 32.0F, 2.0F, 10.0F, 46.0F)
-				.uv(0, 0).cuboid(16.0F, -6.0F, 80.0F, 2.0F, 6.0F, 30.0F)
-				.uv(144, 158).cuboid(8.0F, -4.0F, 112.0F, 2.0F, 4.0F, 14.0F)
-				.uv(144, 158).cuboid(-10.0F, -4.0F, 112.0F, 2.0F, 4.0F, 14.0F)
-				.uv(0, 0).cuboid(-18.0F, -6.0F, 80.0F, 2.0F, 6.0F, 30.0F)
-				.uv(90, 316).cuboid(-26.0F, -10.0F, 32.0F, 2.0F, 10.0F, 46.0F)
-				.uv(250, 290).cuboid(-16.0F, -8.0F, 80.0F, 32.0F, 8.0F, 32.0F)
-				.uv(0, 36).cuboid(-8.0F, -6.0F, 112.0F, 16.0F, 6.0F, 16.0F)
-				.uv(0, 158).cuboid(-24.0F, -12.0F, 32.0F, 48.0F, 12.0F, 48.0F)
-				.uv(0, 0).cuboid(-28.0F, -16.0F, -32.0F, 56.0F, 16.0F, 64.0F)
-				.uv(308, 100).cuboid(-26.0F, -16.0F, -34.0F, 52.0F, 16.0F, 2.0F),
-				ModelTransform.NONE);
+		modelPartData.addChild("Body", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
 		modelPartData.addChild("Bottom", ModelPartBuilder.create()
 				.uv(272, 220).cuboid(-30.0F, -14.0F, -28.0F, 2.0F, 14.0F, 56.0F)
@@ -104,7 +95,7 @@ public class JabbaEntityModel extends EntityModel<JabbaEntity> {
 				.uv(34, 0).cuboid(-6.0F, -16.0F, 112.0F, 2.0F, 4.0F, 10.0F),
 				ModelTransform.NONE);
 
-		return TexturedModelData.of(modelData, 64, 64);
+		return TexturedModelData.of(modelData, 512, 512);
 	}
 
 	@Override
@@ -114,8 +105,11 @@ public class JabbaEntityModel extends EntityModel<JabbaEntity> {
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+		matrices.push();
+		matrices.translate(0.0, 1.5, 0.0);
 		ImmutableList.of(this.base).forEach((modelRenderer) -> {
 			modelRenderer.render(matrices, vertices, light, overlay, red, green, blue, alpha);
 		});
+		matrices.pop();
 	}
 }

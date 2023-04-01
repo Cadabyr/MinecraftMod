@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class JabbaEntityRenderer extends MobEntityRenderer<JabbaEntity, JabbaEntityModel> {
     public JabbaEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new JabbaEntityModel(context.getPart(MyFirstModClient.MODEL_JABBA_LAYER)), 0.5f);
+        super(context, new JabbaEntityModel(context.getPart(MyFirstModClient.JABBA_MODEL_LAYER)), 0.5f);
     }
 
     @Override

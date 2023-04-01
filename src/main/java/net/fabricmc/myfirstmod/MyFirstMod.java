@@ -22,7 +22,7 @@ public class MyFirstMod implements ModInitializer {
 	public static final EntityType<JabbaEntity> JABBA_ENTITY = Registry.register(
 			Registries.ENTITY_TYPE,
 			new Identifier("modid", "jabba"),
-			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, JabbaEntity::new).dimensions(EntityDimensions.fixed(4.0f, 12.0f)).build()
+			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, JabbaEntity::new).dimensions(EntityDimensions.fixed(4.0f, 5.0f)).build()
 	);
 	public static final Logger LOGGER = Logger.getLogger("modid");
 
